@@ -30,7 +30,8 @@ c = conn.cursor()
 
 c.execute(s)
 rows = c.fetchall()
+print(f"{'Time': <6}  {'Temp': <5} {'Feels': <6} Rain")
 for row in rows:
     dd = datetime.datetime.fromisoformat(row[0])
-    print(dd.astimezone(est).strftime(fmt), row[1], row[2], row[3])
+    print(dd.astimezone(est).strftime(fmt), row[1], f'{row[2]: <6}', row[3])
 c.close()
