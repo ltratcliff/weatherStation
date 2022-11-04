@@ -35,7 +35,7 @@ type AmbientWeather []struct {
 	Totalrainin    float64   `json:"totalrainin"`
 	Solarradiation float64   `json:"solarradiation"`
 	Uv             int       `json:"uv"`
-	BattCo2        string    `json:"batt_co2"`
+	BattCo2        int    `json:"batt_co2"`
 	FeelsLike      float64   `json:"feelsLike"`
 	DewPoint       float64   `json:"dewPoint"`
 	FeelsLikein    float64   `json:"feelsLikein"`
@@ -64,17 +64,14 @@ func fetchWeather() AmbientWeather {
 	mac := os.Getenv("MAC")
 	appKey := os.Getenv("APPKEY")
 	apiKey := os.Getenv("APIKEY")
-	endDate := ""
-	limit := "1"
 
 
 
 	params := "apiKey=" + url.QueryEscape(apiKey) + "&" +
-		"applicationKey=" + url.QueryEscape(appKey) + "&" +
-		"endDate=" + url.QueryEscape(endDate) + "&" +
-		"limit=" + url.QueryEscape(limit)
+		"applicationKey=" + url.QueryEscape(appKey)
 
 	path := fmt.Sprintf("https://api.ambientweather.net/v1/devices/%s?%s", mac, params)
+	fmt.Println(path)
 
 	log.Println("Fetching data")
 	resp, err := http.Get(path)
